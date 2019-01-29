@@ -22,7 +22,12 @@ namespace WorkflowConsoleApplication2
 
     private void codeActivity1_ExecuteCode(object sender, EventArgs e)
     {
-      Console.WriteLine("Workflow is running");
+      Console.WriteLine("Workflow: going to start Transaction Scope Activity");
+    }
+
+    private void codeActivity2_ExecuteCode(object sender, EventArgs e)
+    {
+      Console.WriteLine("Inside Transaction Scope Activity");
     }
 
   }

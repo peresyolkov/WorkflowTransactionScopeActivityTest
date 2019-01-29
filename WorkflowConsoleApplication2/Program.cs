@@ -20,7 +20,7 @@ namespace WorkflowConsoleApplication2
         workflowRuntime.WorkflowCompleted += delegate(object sender, WorkflowCompletedEventArgs e) { waitHandle.Set(); };
         workflowRuntime.WorkflowTerminated += delegate(object sender, WorkflowTerminatedEventArgs e)
         {
-          Console.WriteLine(e.Exception.Message);
+          Console.WriteLine(e.Exception.ToString());
           waitHandle.Set();
         };
 

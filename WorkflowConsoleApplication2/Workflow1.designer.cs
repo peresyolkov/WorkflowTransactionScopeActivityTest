@@ -26,23 +26,30 @@ namespace WorkflowConsoleApplication2
     private void InitializeComponent()
     {
       this.CanModifyActivities = true;
-      this.codeActivity1 = new System.Workflow.Activities.CodeActivity();
+      this.codeActivity2 = new System.Workflow.Activities.CodeActivity();
       this.transactionScopeActivity1 = new System.Workflow.ComponentModel.TransactionScopeActivity();
+      this.codeActivity1 = new System.Workflow.Activities.CodeActivity();
+      // 
+      // codeActivity2
+      // 
+      this.codeActivity2.Name = "codeActivity2";
+      this.codeActivity2.ExecuteCode += new System.EventHandler(this.codeActivity2_ExecuteCode);
+      // 
+      // transactionScopeActivity1
+      // 
+      this.transactionScopeActivity1.Activities.Add(this.codeActivity2);
+      this.transactionScopeActivity1.Name = "transactionScopeActivity1";
+      this.transactionScopeActivity1.TransactionOptions.IsolationLevel = System.Transactions.IsolationLevel.Serializable;
+      this.transactionScopeActivity1.TransactionOptions.TimeoutDuration = System.TimeSpan.Parse("00:00:05");
       // 
       // codeActivity1
       // 
       this.codeActivity1.Name = "codeActivity1";
       this.codeActivity1.ExecuteCode += new System.EventHandler(this.codeActivity1_ExecuteCode);
       // 
-      // transactionScopeActivity1
-      // 
-      this.transactionScopeActivity1.Activities.Add(this.codeActivity1);
-      this.transactionScopeActivity1.Name = "transactionScopeActivity1";
-      this.transactionScopeActivity1.TransactionOptions.IsolationLevel = System.Transactions.IsolationLevel.Serializable;
-      this.transactionScopeActivity1.TransactionOptions.TimeoutDuration = System.TimeSpan.Parse("00:00:05");
-      // 
       // Workflow1
       // 
+      this.Activities.Add(this.codeActivity1);
       this.Activities.Add(this.transactionScopeActivity1);
       this.Name = "Workflow1";
       this.CanModifyActivities = false;
@@ -53,7 +60,11 @@ namespace WorkflowConsoleApplication2
 
     private CodeActivity codeActivity1;
 
+    private CodeActivity codeActivity2;
+
     private TransactionScopeActivity transactionScopeActivity1;
+
+
 
 
 
