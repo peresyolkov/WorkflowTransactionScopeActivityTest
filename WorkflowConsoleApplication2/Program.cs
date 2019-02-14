@@ -16,6 +16,14 @@ namespace WorkflowConsoleApplication2
 
       using (WorkflowRuntime workflowRuntime = new WorkflowRuntime())
       {
+        // Run SQL scripts:
+        // C:\Windows\Microsoft.NET\Framework\v3.0\Windows Workflow Foundation\SQL\en\SqlPersistenceService_Schema.sql
+        // C:\Windows\Microsoft.NET\Framework\v3.0\Windows Workflow Foundation\SQL\en\SqlPersistenceService_Logic.sql
+
+        SqlWorkflowPersistenceService sqlPersistenceService = new SqlWorkflowPersistenceService("Server=localhost;Database=NetMeter;User Id=sa;Password=MetraTech1;");
+        workflowRuntime.AddService(sqlPersistenceService);
+        workflowRuntime.AddService(new ConsoleTrackingService());
+
         AutoResetEvent waitHandle = new AutoResetEvent(false);
         workflowRuntime.WorkflowCompleted += delegate(object sender, WorkflowCompletedEventArgs e) { waitHandle.Set(); };
         workflowRuntime.WorkflowTerminated += delegate(object sender, WorkflowTerminatedEventArgs e)
